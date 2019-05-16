@@ -46,6 +46,10 @@ variable "block_device_mappings" {
   default = []
 }
 
+variable "instance_market_type" {
+  default = "spot"
+}
+
 # ----
 
 resource "aws_launch_template" "template" {
@@ -60,6 +64,8 @@ resource "aws_launch_template" "template" {
   instance_initiated_shutdown_behavior = "${var.instance_initiated_shutdown_behavior}"
 
   instance_type = "${var.instance_type}"
+
+  instance_market_options = {market_type="${var.instance_market_type}"}
 
   user_data = "${var.user_data}"
 
